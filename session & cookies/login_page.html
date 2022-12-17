@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>login page</title>
+	
+</head>
+<body>
+	<h1 id="demo"></h1>
+	<p id="cookie-demo"></p>
+
+	<script type="text/javascript">
+		var username = sessionStorage.getItem("username");
+		document.getElementById("demo").innerHTML = "Hello" + " " + username;
+		console.log(document.cookie);
+		document.getElementById("cookie-demo").innerHTML = document.cookie;
+		
+	</script>
+</body>
+</html>
