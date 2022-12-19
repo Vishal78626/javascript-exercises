@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Form Data</title>
+	
+	<!-- styling -->
+	<style>
+		table, td, th {
+			border: 1px solid black;
+		}
+		table {
+			border-collapse: collapse;
+			width: 50%;
+			}
+
+			th {
+			text-align: left;
+			}
+	</style>
+</head>
+<body>
+	<!-- html -->
+	<h1>User Data</h1>
+    <div id="demo"></div>
+
+	<!-- javascript for data and display -->
+	<script>
+        const user = [
+            {
+                id: 1,
+                name: "vishal",
+                email: "singhbadal@gmail.com",
+                age: 20
+            },
+            {
+                id: 2,
+                name: "admin",
+                email: "admin@gmail.com",
+                age: 30
+            },
+			{
+                id: 3,
+                name: "abc",
+                email: "abc@gmail.com",
+                age: 40
+            }
+        ];
+
+		document.getElementById("demo").innerHTML=display();
+
+		function display() {
+			var html = '<table><tr>';
+				html += '<th>ID</th>';
+				html += '<th>Name</th>';
+				html += '<th>Email</th>';
+				html += '<th>Age</th></tr>';
+				
+			user.forEach(function(x) {
+				html += '<tr><td>'+ x.id +'</td>';
+				html += '<td>'+ x.name +'</td>';
+				html += '<td>'+ x.email +'</td>';
+				html += '<td>'+ x.age +'</td></tr>';
+			});
+				html += "</table>";
+				return html;
+		}
+    </script>
+    
+</body>
+</html>
