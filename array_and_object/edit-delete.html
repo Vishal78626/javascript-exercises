@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing with Form Data</title>
+	
+	<!-- styling -->
+	<style>
+		table, td, th {
+			border: 1px solid black;
+		}
+		table {
+			border-collapse: collapse;
+			width: 50%;
+			}
+
+			th {
+			text-align: left;
+			}
+	</style>
+</head>
+<body>
+	<!-- html -->
+	<h1>Edit & delete Data</h1>
+    <div id="demo"></div>
+    <div style="margin-top: 20px; display: flex;" >
+    	<div id='formid' style="display: none; border: 1px solid black; padding: 10px;">
+			<table>
+				<input type="hidden" id="id">
+				<tr>
+					<td><b>Name: </b></td>
+					<td><input type="text" id="name" placeholder="Name"></td>
+				</tr>
+				<tr>
+					<td><b>Email: </b></td>
+					<td><input type="text" id="email" placeholder="Email"></td>
+				</tr>
+				<tr>
+					<td><b>Age: </b></td>
+					<td><input type="number" id="age" placeholder="Age"></td>
+				</tr>
+			</table>
+			<button onclick="edit()" style="margin-top: 10px;">Edit</button>
+		</div>
+	</div>
+
+	<!-- javascript code for data and display -->
+	<script>
+        const user = [
+            {
+                id: 1,
+                name: "vishal",
+                email: "singhbadal@gmail.com",
+                age: 20
+            },
+            {
+                id: 2,
+                name: "admin",
+                email: "admin@gmail.com",
+                age: 30
+            },
+			{
+                id: 3,
+                name: "rahul",
+                email: "Zsoni@gmail.com",
+                age: 40
+            },
+            {
+                id: 4,
+                name: "Mohit",
+                email: "Rathore@gmail.com",
+                age: 50
+            }
+        ];
+
+
+        // display user in table
+        document.getElementById("demo").innerHTML=display();
+		function display() {
+			var html = '<table><tr>';
+				html += '<th>ID</th>';
+				html += '<th>Name</th>';
+				html += '<th>Email</th>';
+				html += '<th>Age</th>';
+				html += '<th>Action</th></tr>';
+			let i = 1;
+			user.forEach(function(x) {
+				
+				html += '<tr><td>'+ i +'</td>';
+				html += '<td>'+ x.name +'</td>';
+				html += '<td>'+ x.email +'</td>';
+				html += '<td>'+ x.age +'</td>';
+				html += '<td><a href="#" onclick="showData('+ x.id+',' +
+					'\''+x.name+'\''+',' +
+					'\''+x.email+'\''+','+ x.age +')">Edit</a> / <a href="#" onclick="deleteData(' + x.id + ')">Delete</a></td></tr>';
+				i++;
+			});
+				html += "</table>";
+				return html;
+		}
+
+		// edit
+		function edit() {
+			let mId = document.getElementById('id').value;
+			let mName = document.getElementById('name').value;
+			let mEmail = document.getElementById('email').value;
+			let mAge = document.getElementById('age').value;
+			let objIndex = user.findIndex((obj => obj.id == mId));
+			user[objIndex].name = mName;
+			user[objIndex].email = mEmail;
+			user[objIndex].age = mAge;
+			document.getElementById("demo").innerHTML=display();
+			document.getElementById('formid').style.display='none';
+			console.log(user);
+		}
+
+		// show current data in feilds
+		function showData(id, name, email, age) {
+			document.getElementById('id').value = id;
+			document.getElementById('name').value = name;
+			document.getElementById('email').value = email;
+			document.getElementById('age').value = age;
+			document.getElementById('formid').style.display='block';
+			console.log(id, name, email, age);
+		}
+
+		// Delete User from array
+		function deleteData(id) {
+			user.splice(id-1,1);
+			console.log(user);
+			document.getElementById("demo").innerHTML=display();
+		}
+
+    </script>
+</body>
+</html>
