@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Form Data</title>
+	
+	<!-- styling -->
+	<style>
+		table, td, th {
+			border: 1px solid black;
+		}
+		table {
+			border-collapse: collapse;
+			width: 50%;
+			}
+
+			th {
+			text-align: left;
+			}
+	</style>
+</head>
+<body>
+	<!-- html -->
+	<h1>User Data</h1>
+    <div id="demo"></div>
+    <div style="margin-top: 20px; display: flex;" >
+    	<div style="display: block; border: 1px solid black; padding: 10px;">
+	    	<label>Enter ID which you want to swap</label><br>
+	    	<input type="text" id="swapto" placeholder="Enter Swap id" />
+			<br>
+	    	<label>Enter ID which you want to swap from</label><br>
+	    	<input type="text" id="swapfrom" placeholder="Enter Swap id" />
+	   		<br> 	
+	    	<button onclick="swap()">Swap</button><br>
+	    	<p id="errorMsg"></p>
+    	</div>
+    	<div id ="sort" style="display: block; border: 1px solid black; padding: 10px; margin-left: 10px;">
+    	</div>
+	</div>
+
+	<!-- javascript code for data and display -->
+	<script>
+        const user = [
+            {
+                id: 1,
+                name: "vishal",
+                email: "singhbadal@gmail.com",
+                age: 20
+            },
+            {
+                id: 2,
+                name: "admin",
+                email: "admin@gmail.com",
+                age: 30
+            },
+			{
+                id: 3,
+                name: "rahul",
+                email: "Zsoni@gmail.com",
+                age: 40
+            },
+            {
+                id: 4,
+                name: "Mohit",
+                email: "Rathore@gmail.com",
+                age: 50
+            }
+        ];
+
+
+        // display user in table
+        document.getElementById("demo").innerHTML=display();
+		function display() {
+			var html = '<table><tr>';
+				html += '<th>ID</th>';
+				html += '<th>Name</th>';
+				html += '<th>Email</th>';
+				html += '<th>Age</th></tr>';
+			let i = 1;
+			user.forEach(function(x) {
+				
+				html += '<tr><td>'+ i +'</td>';
+				html += '<td>'+ x.name +'</td>';
+				html += '<td>'+ x.email +'</td>';
+				html += '<td>'+ x.age +'</td></tr>';
+				i++;
+			});
+				html += "</table>";
+				return html;
+		}
+
+
+		// Change the position of specific user
+        function swap() {
+        	let max = user.length + 1;
+        	let x = document.getElementById('swapto').value;
+        	let y = document.getElementById('swapfrom').value;
+        	
+        	if( (x > 0 && y > 0)  && (x < max && y < max) ) {
+        		[user[y-1], user[x-1]] = [user[x-1], user[y-1]]
+        		document.getElementById("demo").innerHTML=display();
+        		document.getElementById('swapto').value="";
+        		document.getElementById('swapfrom').value="";
+        	}
+        	else {
+        		let x = document.getElementById('errorMsg');
+        		x.style.color ="red";
+        		x.innerHTML='Please enter vaild range between 1 to ' + (max-1);
+        	}
+        }
+
+        // Sorting
+        document.getElementById('sort').innerHTML="<button id='order' onclick='sortName()'>Sort by Name</button> <br> <button onclick='sortEmail()' style='margin-top: 5px;'>Sort by Email</button>";
+
+        var order = 'asc';
+        function sortName() {
+
+        	if (order == 'asc') {
+        		user.sort(ascending);
+        		order = 'desc';
+        	}
+        	else {
+        		user.sort(descending);
+        		order = 'asc';
+        	}
+	
+        	function ascending(a, b) { 
+        		document.getElementById('order').innerHTML="Sort by Name ^";
+        		let x = a.name.toLowerCase();
+        		let y = b.name.toLowerCase();
+	    	 	if(x < y) {
+	    	 		return -1;
+	    	 	}
+	    	 	if ( x > y) {
+	    	 		return 1;
+	    	 	}
+	    	 	return 0;
+    	    }
+
+    	    function descending(a, b) { 
+    	    	document.getElementById('order').innerHTML="Sort by Name v";
+	    	 	let x = a.name.toLowerCase();
+        		let y = b.name.toLowerCase();
+	    	 	if(x > y) {
+	    	 		return -1;
+	    	 	}
+	    	 	if ( x < y) {
+	    	 		return 1;
+	    	 	}
+	    	 	return 0;
+			}  
+	    	document.getElementById("demo").innerHTML=display();    	 	
+        }
+
+        function sortEmail() {
+        	user.sort(emailAsc);
+        		
+    		function emailAsc(a, b) { 
+			let x = a.email.toLowerCase();
+    		let y = b.email.toLowerCase();
+    		console.log(x, y);
+    	 	if(x < y) {
+    	 		return -1;
+    	 	}
+    	 	if ( x > y) {
+    	 		return 1;
+    	 	}
+    	 	return 0;
+    	    }
+    	 	document.getElementById("demo").innerHTML=display();
+        }
+    </script>
+</body>
+</html>
