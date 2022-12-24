@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playing with Form Data</title>
+	
+	<!-- styling -->
+	<style>
+		table, td, th {
+			border: 1px solid black;
+		}
+		table {
+			border-collapse: collapse;
+			width: 50%;
+			}
+
+			th {
+			text-align: left;
+			}
+	</style>
+</head>
+<body>
+	<!-- html content -->
+	<h1>Display data with Name and Email</h1>
+    
+	<div style="display: flex;">
+		<div id="displayName"></div>
+		<div style="margin-left: 10px;" id="displayEmail"></div>
+	</div>
+
+	<div style="margin-top:20px;" id="demo"></div>
+
+	<!-- javascript code for data and display -->
+	<script>
+        const user = [
+            {
+                id: 1,
+                name: "vishal",
+                email: "singhbadal@gmail.com",
+                age: 20
+            },
+            {
+                id: 2,
+                name: "admin",
+                email: "admin@gmail.com",
+                age: 30
+            },
+			{
+                id: 3,
+                name: "rahul",
+                email: "Zsoni@gmail.com",
+                age: 40
+            },
+            {
+                id: 4,
+                name: "Mohit",
+                email: "Rathore@gmail.com",
+                age: 50
+            }
+        ];
+
+
+		document.getElementById('displayName').innerHTML=displayName();
+		document.getElementById('displayEmail').innerHTML=displayEmail();
+
+		function displayName() {
+			var html = '<select onclick="getDetails(this.value)"><Option value="">--Select Name--</Option>';
+				user.forEach(function(x) {
+					html += '<option value="'+x.id+'">'+x.name+'</option>';
+				});
+				html += '</select>';
+				return html;
+		}
+
+		function displayEmail() {
+			var html = '<select onclick="getDetails(this.value)"><Option value="">--Select Email--</Option>';
+				user.forEach(function(x) {
+					html += '<option value="'+x.id+'">'+x.email+'</option>';
+				});
+				html += '</select>';
+				return html;
+		}
+
+		function getDetails(id) {
+			if(id != "")
+			{
+				const x = user.filter(item => item.id == id);
+				let html =  "<table><tr>";
+				html += '<th>Name</th>';
+				html += '<th>Email</th>';
+				html += '<th>Age</th></tr>';
+				html += '<td>'+x[0].name+'</td>';
+				html += '<td>'+x[0].email+'</td>';
+				html += '<td>'+x[0].age+'</td></tr></table>';
+				document.getElementById("demo").style.display="block";
+				document.getElementById("demo").innerHTML=html;
+			}
+			else {
+				document.getElementById("demo").style.display="none";
+			}
+		}
+    </script>
+</body>
+</html>
