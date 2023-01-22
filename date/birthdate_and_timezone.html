@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Date</title>
+</head>
+<body>
+
+	<div>
+	<p id="today"></p>
+	<p id="birthdate"></p>
+	<p id="years"></p>
+	<p id="months"></p>
+	<p id="weeks"></p>
+	<p id="days"></p>
+	<p id="hours"></p>
+	<p id="minutes"></p>
+	<p id="seconds"></p>
+</div>
+<hr>
+<div>
+	<p id="ist"></p>
+	<p id="gst"></p>
+	<p id="utc"></p>
+</div>
+<script type="text/javascript">
+
+	// Time
+
+	let today = new Date('2023-01-16');
+	document.getElementById("today").innerHTML = '<b>Today: </b>' + today;
+	
+	let bday = new Date('1999-09-18');
+	document.getElementById("birthdate").innerHTML = '<b>Today: </b>' + bday;
+
+
+	// 1673827200000	-	937612800000 =>   
+	let seconds = (today.getTime()-bday.getTime())/1000;
+	document.getElementById("seconds").innerHTML = '<b>Total-Seconds: </b>' + seconds.toFixed(0);
+
+	document.getElementById("minutes").innerHTML = '<b>Total-Minutes: </b>' + (seconds/60).toFixed(0);
+
+	document.getElementById("hours").innerHTML = '<b>Total-Hours: </b>' + (seconds/(60*60)).toFixed(0);
+	
+	document.getElementById("days").innerHTML = '<b>Total-Days: </b>' + (seconds/(60*60*24)).toFixed(0);
+
+	document.getElementById("weeks").innerHTML = '<b>Total-Weeks: </b>' + (seconds/(60*60*24*7)).toFixed(0);
+	
+	// (2023 - 1999) * 12 + 0 - 8 => 280 
+	let months = (today.getFullYear() - bday.getFullYear()) * 12 + today.getMonth() - bday.getMonth();
+	document.getElementById("months").innerHTML = '<b>Total-Months: </b>' + months;
+
+	// 2023 - 1999 => 24
+	let years = today.getFullYear() - bday.getFullYear();	
+	document.getElementById("years").innerHTML = '<b>Total-Year: </b>' + years;
+
+	// Timezone
+
+	let date = new Date();
+
+	document.getElementById('ist').innerHTML= '<b>IST timezone: </b>'+date.toISOString();
+	
+	document.getElementById('gst').innerHTML= '<b>Asia/Tokyo timezone: </b>'+date.toLocaleString("en-US", {timeZone: "Asia/Tokyo"});
+
+	document.getElementById('utc').innerHTML= '<b>UTC timezone: </b>'+date.toUTCString();
+
+
+
+	console.log(date);
+
+</script>
+</body>
+</html>
