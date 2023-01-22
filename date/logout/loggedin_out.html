@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout After 5 Minutes</title>
+</head>
+
+<body>
+    <h1 id="demo"></h1>
+
+    <script>
+        let name = sessionStorage.getItem('username');
+        document.getElementById('demo').innerHTML = "Welcome " + name;
+        setTimeout(myFunction, 300000);
+        function myFunction() {
+            window.location = 'test.html';
+        }
+    
+    </script>
+</body>
+</html>
