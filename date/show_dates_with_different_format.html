@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Date Representation & Format</title>
+</head>
+<body>
+	<p id="fullyear"></p>
+	<p id="shortyear"></p>
+	<p id="fullmonthname"></p>
+	<p id="shortmonthname"></p>
+	<p id="fullday"></p>
+	<p id="shortday"></p>
+
+	<script>
+		let date  = new Date();
+		document.getElementById('fullyear').innerHTML = date.getFullYear();
+		document.getElementById('shortyear').innerHTML = date.getFullYear().toString().substr(-2);
+		document.getElementById('fullmonthname').innerHTML = date.toLocaleString('en-US', {month: 'long'});
+		document.getElementById('shortmonthname').innerHTML = date.toLocaleString('en-US', {month: 'short'});
+
+		const weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday', 'Saturday'];
+		document.getElementById('fullday').innerHTML = weekday[date.getDay()];
+
+		document.getElementById('shortday').innerHTML = weekday[date.getDay()].toString().substr(0, 3);
+
+		console.log(new Date('2022-08-22T13:10:09'));
+		
+	</script>
+</body>
+</html>
