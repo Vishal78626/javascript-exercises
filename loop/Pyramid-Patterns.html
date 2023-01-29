@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Pyramid</title>
+</head>
+<body>
+	<div style="border: 1px solid black; display: inline-block;">
+		<label>Pyramid Pattern 1</label>
+		<p id="pyramid1"></p>
+	</div>
+
+	<div style="border: 1px solid black; display: inline-block;">
+		<label>Pyramid Pattern 2</label>
+		<p id="pyramid2"></p>
+	</div>
+
+	<div style="border: 1px solid black; display: inline-block;">
+		<label>Pyramid Pattern 3</label>
+		<p id="pyramid3"></p>
+	</div>
+
+	<div style="border: 1px solid black; display: inline-block;">
+		<label>Pyramid Pattern 4</label>
+		<p id="pyramid4"></p>
+	</div>
+	
+	<script type="text/javascript">
+		function pyramid1() {
+			let data = "";
+			for(let i=1; i<=5; i++) {
+				for(let j=1; j<=i; j++) {
+					data += "*";				
+				}
+				data += "<br>";
+			}
+			return data;
+		}
+		document.getElementById("pyramid1").innerHTML=pyramid1(); 
+
+		function pyramid2() {
+			const charArr = ['A','B','C','D','E'];
+			let data = "";
+			for(let i=1; i<=5; i++) {
+				for(let j=1; j<=i; j++) {
+					data += charArr[j-1];				
+				}
+				data += "<br>";
+			}
+			return data;
+		}
+		document.getElementById("pyramid2").innerHTML=pyramid2();
+
+		function pyramid3() {
+			const charArr = ['A','B','C','D','E'];
+			let data = "";
+			for(let i=1; i<=5; i++) {
+				for(let j=1; j<=i; j++) {
+					data += charArr[i-1];				
+				}
+				data += "<br>";
+			}
+			return data;
+		}
+		document.getElementById("pyramid3").innerHTML=pyramid3();
+
+		function pyramid4() {
+			let data = "";
+
+			for(let i=1; i<=5; i++) {
+				
+				for(let j=1; j<=(2*(5-i))/2; j++) {
+					data += '_ ';
+				}
+				
+				for(let j=1; j<=i; j++) {
+					data += "* ";
+				}
+
+				data += "<br>";
+			}
+			return data;
+		}
+		document.getElementById("pyramid4").innerHTML=pyramid4();
+
+
+	
+	</script>
+
+</body>
+</html>
