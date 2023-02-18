@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Regular Expression</title>
+</head>
+<body>
+
+	<p id="empty" onclick="changeEmpty()">Hello World !</p>
+	<p id="email" onclick="validateEmail()">singhbadal992@gmail.com</p>
+	<p id="phone" onclick="validatePhone()">9815111232</p>
+	
+	<span><label>Enter Password</label><br><input type="text" name="" id="password" />
+	<p id="errMSG" style="color: red;"></p></span>
+	<button onclick="validatePass()">Submit</button>
+
+</body>
+
+<script type="text/javascript">
+	var x = "Hello World !";
+	function changeEmpty() {
+		let reg = /\s/g;
+		let replace = "-";
+		x = x.replace(reg, replace);
+		document.getElementById("empty").innerHTML = x;
+	}
+
+	function validateEmail() {
+		let emailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		let value = document.getElementById("email").innerHTML;
+		if(value.match(emailReg)) {
+			alert("Correct Email");
+		}
+		else {
+			alert("Incorrect Email")
+		}
+	}
+
+	function validatePhone() {
+		let phoneReg = /^\d{10}$/;
+		let value = document.getElementById("phone").innerHTML;
+		if(value.match(phoneReg)) {
+			alert("Correct Phone no.");
+		}
+		else {
+			alert("Incorrect Phone no.")
+		}
+	}
+
+	function validatePass() {
+		passVal = document.getElementById('password').value;
+		if(passVal.length < 8) {
+			document.getElementById('errMSG').innerHTML = "Password length must be > 8 character";
+			// document.getElementById('password').value = "";
+		}
+		else {
+			var lowerCaseLetters = /[a-z]/g;
+			var upperCaseLetters = /[A-Z]/g;
+			var numbers = /[0-9]/g;
+			var specialChar = /[\!\@\#\$\%\^\&\*\)\(\+\=\.\<\>\{\}\[\]\:\;\'\"\|\~\`\_\-]/g;
+
+			if(!passVal.match(lowerCaseLetters)) {
+				document.getElementById('errMSG').innerHTML = "Password must include lowerCaseLetters";
+			}
+			else if (!passVal.match(upperCaseLetters)) {
+				document.getElementById('errMSG').innerHTML = "Password must include upperCaseLetters";
+			}
+			else if (!passVal.match(numbers)) {
+				document.getElementById('errMSG').innerHTML = "Password must include numbers";
+			}
+			else if (!passVal.match(specialChar)) {
+				document.getElementById('errMSG').innerHTML = "Password must include specialChar";
+			}
+			else {
+				document.getElementById('errMSG').style.color = "green";
+				document.getElementById('errMSG').innerHTML = "Valid Password";				
+			}
+		}
+	}
+	
+</script>
+</html>
