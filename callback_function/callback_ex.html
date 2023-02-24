@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callback</title>
+</head>
+<body>
+    <p id="demo"></p>
+    
+    <script>
+        const myArray = [4, 1, -20, -7, 5, 9, -6];
+
+        const posNum = removeNeg(myArray, (x) => x>=0);
+
+        document.getElementById('demo').innerHTML = posNum;
+        function removeNeg(myArray, callback) {
+            const newArray = [];
+            for(let x of myArray) {
+                if(callback(x)) {
+                    newArray.push(x);
+                }
+            }
+            return newArray;
+        }
+
+    </script>
+</body>
+</html>
