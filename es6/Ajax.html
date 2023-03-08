@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<body>
+    <button onclick="callXHR()">XHR</button>
+    <button onclick="fetchAPI()">Fetch API</button>
+    <button onclick="ajaxCall()">AJAX</button>
+    <p id="demo"></p>
+    <script>
+        function callXHR() {
+            const Http = new XMLHttpRequest();
+            const url='https://api.coindesk.com/v1/bpi/currentprice.json';
+            Http.open("GET", url);
+            Http.send();
+            Http.onreadystatechange=(e)=>{
+            document.getElementById('demo').innerHTML = Http.responseText;
+            // console.log(Http.responseText)
+            }
+        }
+
+        function fetchAPI() {
+            fetch('https://api.coindesk.com/v1/bpi/currentprice.json', {
+                method: 'get'
+            })
+            .then(response => response.json())
+            .then(jsonData => document.getElementById('demo').innerHTML = JSON.stringify(jsonData))
+            .catch(err => {
+                    //error block
+                })
+        }
+
+        function ajaxCall() {
+            $.ajax({
+                url: 'https://api.coindesk.com/v1/bpi/currentprice.json',
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    document.getElementById('demo').innerHTML = JSON.stringify(data);
+                },
+                error: function (error) {
+                    console.log(`Error ${error}`);
+                }
+            });
+        }
+
+
+    </script>
+</body>
+</html>
